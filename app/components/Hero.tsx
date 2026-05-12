@@ -20,11 +20,11 @@ export default function Hero() {
                 
                 <div className="relative z-10 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex flex-col items-start text-left pt-20 h-full justify-between pb-16">
                     <div className="max-w-3xl mt-auto">
-                        <div className="flex flex-row gap-6 mt-auto">
-                            <a href="#projects" className="inline-flex justify-center items-center bg-secondary text-on-secondary px-8 py-4 font-label-lg text-label-lg uppercase tracking-widest rounded-DEFAULT transition-all duration-300 hover:bg-secondary-fixed hover:shadow-[0_0_20px_rgba(233,195,73,0.4)] hover:-translate-y-1">
+                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-auto">
+                            <a href="#projects" className="inline-flex justify-center items-center bg-secondary text-on-secondary px-6 py-3 md:px-8 md:py-4 font-label-lg text-label-lg uppercase tracking-widest rounded-DEFAULT transition-all duration-300 hover:bg-secondary-fixed hover:shadow-[0_0_20px_rgba(233,195,73,0.4)] hover:-translate-y-1 text-center">
                                 Explore Projects
                             </a>
-                            <a href="#contact" className="inline-flex justify-center items-center relative px-8 py-4 font-label-lg text-label-lg uppercase tracking-widest text-primary-fixed rounded-DEFAULT overflow-hidden group transition-all duration-300 hover:-translate-y-1">
+                            <a href="#contact" className="inline-flex justify-center items-center relative px-6 py-3 md:px-8 md:py-4 font-label-lg text-label-lg uppercase tracking-widest text-primary-fixed rounded-DEFAULT overflow-hidden group transition-all duration-300 hover:-translate-y-1 text-center">
                                 <div className="absolute inset-0 bg-surface/20 backdrop-blur-sm border border-outline-variant rounded-DEFAULT group-hover:border-secondary transition-colors duration-300"></div>
                                 <span className="relative z-10 group-hover:text-secondary transition-colors duration-300">Contact Us</span>
                             </a>
