@@ -91,13 +91,18 @@ export default function Projects() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start content-start">
-                {currentProjects.map((project) => (
-                    <Card 
-                        key={project.id} 
-                        title={project.title} 
-                        imageUrl={project.imageUrl} 
-                    />
-                ))}
+                {Array.from({ length: itemsPerPage }).map((_, index) => {
+                    const project = currentProjects[index];
+                    return project ? (
+                        <Card 
+                            key={project.id} 
+                            title={project.title} 
+                            imageUrl={project.imageUrl} 
+                        />
+                    ) : (
+                        <div key={`placeholder-${index}`} className="w-full aspect-[4/3] invisible"></div>
+                    );
+                })}
             </div>
 
             {totalPages > 1 && (

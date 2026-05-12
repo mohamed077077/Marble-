@@ -52,14 +52,11 @@ return(
                         </div>
                     </div>
                     
-                    <div className="border-t border-outline-variant/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div className="border-t border-outline-variant/20 pt-8 flex  justify-center items-center ">
                         <p className="font-body-md text-sm text-on-surface-variant/60">
                             &copy; 2026 Marble Plus Construction. All rights reserved.
                         </p>
-                        <div className="flex items-center gap-6 text-on-surface-variant/60">
-                            <Link href="#" className="hover:text-secondary transition-colors text-sm font-label-lg uppercase tracking-wider">Privacy Policy</Link>
-                            <Link href="#" className="hover:text-secondary transition-colors text-sm font-label-lg uppercase tracking-wider">Terms of Service</Link>
-                        </div>
+               
                     </div>
                 </div>
             </footer>
