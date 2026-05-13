@@ -38,7 +38,7 @@ export default function Header() {
                         onClick={toggleMenu}
                         className="md:hidden text-primary hover:text-secondary p-2 focus:outline-none z-50 relative transition-all duration-300 cursor-pointer hover:scale-110 active:scale-95  rounded-full"
                     >
-                        <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: '"FILL" 0' }}>
+                        <span translate="no" className="material-symbols-outlined text-3xl notranslate" style={{ fontVariationSettings: '"FILL" 0' }}>
                             {isMenuOpen ? 'close' : 'menu'}
                         </span>
                     </button>
