@@ -13,7 +13,7 @@ export default function Header() {
                 <div className="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto  h-20">
                     <div className="font-headline-md text-headline-md text-primary dark:text-primary-fixed tracking-tighter">
                         <a href="/" >
-                            <Image  alt="MARBLE+" width={100} height={100} src="/my-icon.png" className="object-contain"/>
+                            <Image  alt="MARBLE+" width={100} height={100} src="/my-icon.webp" className="object-contain"/>
                         </a>
                     </div>
                     

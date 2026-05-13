@@ -6,12 +6,12 @@ export default function Hero() {
         <div id="home" className="relative w-full h-[90vh] min-h-[700px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <picture>
-                        <source media="(min-width: 1024px)" srcSet="/logo-lg.png" />
-                        <source media="(min-width: 768px)" srcSet="/logo-md.png" />
+                        <source media="(min-width: 1024px)" srcSet="/logo-lg.webp" />
+                        <source media="(min-width: 768px)" srcSet="/logo-md.webp" />
                         <img 
                             alt="Marble background" 
                             className="w-full h-full object-cover object-center" 
-                            src="/logo-sm.jpeg"
+                            src="/logo-sm.webp"
                         />
                     </picture>
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-surface-container-lowest/80 to-surface/40 mix-blend-multiply"></div>
