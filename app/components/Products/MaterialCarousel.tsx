@@ -29,7 +29,7 @@ export default function MaterialCarousel({ title, items }: MaterialCarouselProps
         <div className="w-full overflow-hidden">
             <div className="mb-12 flex justify-between items-end">
                 <div className="flex flex-col items-start">
-                    <h2 className="font-headline-xl text-headline-xl text-primary-fixed inline-block relative pb-4 tracking-widest uppercase ">
+                    <h2 className="font-headline-xl text-headline-md md:text-headline-xl text-primary-fixed inline-block relative pb-4 tracking-widest uppercase ">
                         {title}
                         <span className="absolute bottom-0 left-0 w-full h-px bg-outline-variant/30"></span>
                         <span 
