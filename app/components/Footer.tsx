@@ -1,6 +1,18 @@
-"use client";
-
+import Image from "next/image";
 import Link from "next/link";
+import { MapPin, Phone, Mail } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const MapComponent = dynamic(() => import("./GoogleMap"), {
+    ssr: true,
+    loading: () => (
+        <div className="w-full h-full bg-surface-variant/50 animate-pulse flex flex-col gap-2 items-center justify-center text-on-surface-variant/50">
+            <MapPin className="w-8 h-8 animate-bounce" />
+            <span className="font-body-sm tracking-wider uppercase">Loading Map...</span>
+        </div>
+    )
+});
+
 export default function Footer() {
 return(
 <>
@@ -8,8 +20,8 @@ return(
                 <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                         {/* Brand & About */}
-                        <div className="col-span-1 lg:col-span-1">
-                            <img alt="MARMAR+" className="h-12 md:h-16 w-auto object-contain mb-6 opacity-90" src="my-icon.png"/>
+                        <div className="col-span-1 lg:col-span-1 relative">
+                            <Image alt="MARMAR+" width={200} height={200} className="w-auto object-contain mb-6 opacity-90" src="/my-icon.webp" loading="lazy" />
                             <p className="font-body-md text-on-surface-variant/80 mb-6 max-w-sm">
                                 Curators of extraordinary natural stone for luxury architectural and interior design projects worldwide. Crafting eternity since 1998.
                             </p>
@@ -22,15 +34,15 @@ return(
                             <h4 className="font-headline-md text-xl text-primary-fixed mb-6 uppercase tracking-wider">Contact Us</h4>
                             <ul className="space-y-4 font-body-md text-on-surface-variant/80">
                                 <li className="flex items-start gap-3">
-                                    <span translate="no" className="material-symbols-outlined text-secondary text-xl">location_on</span>
+                                    <MapPin className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
                                     <span>1250 Premium Way, Suite 400<br/>Design District, NY 10013</span>
                                 </li>
                                 <li className="flex items-center gap-3">
-                                    <span translate="no" className="material-symbols-outlined text-secondary text-xl">call</span>
+                                    <Phone className="w-5 h-5 text-secondary shrink-0" />
                                     <Link href="tel:+12125550198" className="hover:text-secondary transition-colors">+1 (212) 555-0198</Link>
                                 </li>
                                 <li className="flex items-center gap-3">
-                                    <span translate="no" className="material-symbols-outlined text-secondary text-xl">mail</span>
+                                    <Mail className="w-5 h-5 text-secondary shrink-0" />
                                     <Link href="mailto:inquiries@marbleplus.com" className="hover:text-secondary transition-colors">inquiries@marbleplus.com</Link>
                                 </li>
                             </ul>
@@ -40,18 +52,7 @@ return(
                         <div className="col-span-1 md:col-span-2 lg:col-span-2">
                             <h4 className="font-headline-md text-xl text-primary-fixed mb-6 uppercase tracking-wider">Our Location</h4>
                             <div className="w-full h-64 rounded-lg overflow-hidden border border-outline-variant/30  opacity-80 transition-all duration-500">
-                                <iframe 
-                                    className="block"
-                                    translate="no"
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.9504481541813!2d-74.00839062341996!3d40.71821037139234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2598a3033d599%3A0xc6c764e7c75b871c!2sDesign%20District!5e0!3m2!1sen!2sus!4v1715485000000!5m2!1sen!2sus" 
-                                    width="100%" 
-                                    height="100%" 
-                                    style={{ border: 0 }} 
-                                    allowFullScreen 
-                                    loading="lazy" 
-                                    referrerPolicy="no-referrer-when-downgrade"
-                                    title="Location"
-                                ></iframe>
+                                <MapComponent />
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import useObserve from "./hooks/useObserve";
 import useMobileToggle from "./hooks/useMobileToggle";
+import { Menu, X } from "lucide-react";
 
 export default function Header() {
     const activeSection = useObserve();
@@ -38,9 +39,7 @@ export default function Header() {
                         onClick={toggleMenu}
                         className="md:hidden text-primary hover:text-secondary p-2 focus:outline-none z-50 relative transition-all duration-300 cursor-pointer hover:scale-110 active:scale-95  rounded-full"
                     >
-                        <span translate="no" className="material-symbols-outlined text-3xl notranslate" style={{ fontVariationSettings: '"FILL" 0' }}>
-                            {isMenuOpen ? 'close' : 'menu'}
-                        </span>
+                        {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                     </button>
                 </div>
             </header>
