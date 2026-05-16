@@ -145,3 +145,11 @@ body {
     scrollbar-width: thin;
     scrollbar-color: color-mix(in srgb, var(--color-secondary) 80%, transparent) transparent;
 }
+
+/* Responsive image utility */
+.responsive-img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
+}

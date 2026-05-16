@@ -1,19 +1,40 @@
 "use client";
 
-import Card from "./Project";
+import Card from "./Card";
 import useFetch from "../../hooks/useFetch";
 import usePagination from "../../hooks/usePagination";
 import { Types } from "mongoose";
+import { Tab } from "../page";
+import { handleReorder } from "../actions/handleReorder";
+import { handleDelete } from "../actions/handleDelete";
 
-interface ProjectType {
+interface DataType {
     _id: Types.ObjectId;
     title: string;
     imageUrl: string;
+    order?: number;
 }
 
-export default function Projects() {
+
+
+
+export default function Display({activeTab}: {activeTab: Tab}) {
     // handle data fetching 
-    const { data: projectsData, isLoading, error } = useFetch<ProjectType[]>('/api/projects', []);
+    const endpoint = activeTab === 'projects' ? '/api/projects' : activeTab === 'products' ? '/api/products' : '/api/materials';
+    const { data, isLoading, error , refetch } = useFetch<DataType[]>(endpoint, []);
+
+    const deleteAction = (id: string , setIsDeleting: React.Dispatch<React.SetStateAction<boolean>>) => {
+        handleDelete(id, activeTab, refetch , setIsDeleting);
+    };
+
+    const upvoteAction = (id: string , setIsVoting: React.Dispatch<React.SetStateAction<boolean>>) => {
+        handleReorder(id, 'up', activeTab, refetch , setIsVoting);
+    };
+
+    const downvoteAction = (id: string , setIsVoting: React.Dispatch<React.SetStateAction<boolean>>) => {
+        handleReorder(id, 'down', activeTab, refetch , setIsVoting);
+    };
+
     
     // handle pagination
     const {
@@ -21,9 +42,9 @@ export default function Projects() {
         setCurrentPage,
         itemsPerPage,
         totalPages,
-        currentData: currentProjects,
+        currentData,
         displayedNumbers
-    } = usePagination(projectsData);
+    } = usePagination(data);
 
     if (isLoading) {
         return (
@@ -33,7 +54,7 @@ export default function Projects() {
         );
     }
 
-    if (error || projectsData.length === 0) {
+    if (error || data.length === 0) {
         return (
             <section id="projects" className="py-24 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop min-h-[500px] flex justify-center items-center">
                 <div className="text-center">
@@ -45,27 +66,28 @@ export default function Projects() {
     }
 
 
-    return (
-        <section id="projects" className="py-24 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-            <div className="mb-16 flex flex-col items-start">
-                <h2 className="font-headline-xl text-headline-xl text-primary-fixed inline-block relative pb-4">
-                    Featured Projects
-                    <span className="absolute bottom-0 left-0 w-full h-px bg-outline-variant/30"></span>
-                    <span 
-                        className="absolute bottom-0 left-0 h-[2px] bg-secondary transition-all duration-300 ease-out"
-                        style={{ width: `${(currentPage / totalPages) * 100}%` }}
-                    ></span>
-                </h2>
-            </div>
 
+
+    return (
+        <section  className="py-24 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start content-start">
                 {Array.from({ length: itemsPerPage }).map((_, index) => {
-                    const project = currentProjects[index];
-                    return project ? (
+                    const item = currentData[index];
+                    const globalIndex = data.findIndex(d => d._id.toString() === item?._id.toString());
+                    const isFirst = globalIndex === 0;
+                    const isLast = globalIndex === data.length - 1;
+
+                    return item ? (
                         <Card 
-                            key={project._id.toString()} 
-                            title={project.title} 
-                            imageUrl={project.imageUrl} 
+                            key={item._id.toString()}
+                            id={item._id.toString()}
+                            title={item.title} 
+                            imageUrl={item.imageUrl} 
+                            deleteAction={deleteAction}
+                            upvoteAction={upvoteAction}
+                            downvoteAction={downvoteAction}
+                            activeTab={activeTab}
+                            refetch={refetch}
                         />
                     ) : (
                         <div key={`placeholder-${index}`} className="w-full aspect-[4/3] invisible"></div>

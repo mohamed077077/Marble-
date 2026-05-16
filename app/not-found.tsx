@@ -1,14 +1,10 @@
-"use client";
 
 import Link from "next/link";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer";
+
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col min-h-screen bg-background">
-      <Header />
-      
+    <div className="flex flex-col min-h-screen bg-background">      
       <main className="flex-grow flex items-center justify-center pt-32 pb-20 px-4 relative z-10">
         <div className="text-center max-w-2xl mx-auto space-y-8 flex flex-col items-center">
           
@@ -40,7 +36,6 @@ export default function NotFound() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }
