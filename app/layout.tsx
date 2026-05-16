@@ -16,7 +16,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: "Marble Plus Construction | Exclusive Stone Collection",
   description: "Exclusive Stone Collection and Construction Projects",
-  icons: { icon: "/my-icon.webp" }
+  icons: { icon: "/fav.webp" }
 };
 
 export default function RootLayout({ children }: Readonly<{
