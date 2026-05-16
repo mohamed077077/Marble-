@@ -9,7 +9,7 @@ return(
 <>
             <footer id="contact" className="bg-surface-container-lowest border-t border-outline-variant/20 pt-20 pb-10">
                 <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-margin-desktop">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                    <div className="grid grid-cols-1 lg:grid-cols-2  gap-12 mb-16">
                         {/* Brand & About */}
                         <div className="col-span-1 lg:col-span-1 relative">
                             <Image alt="MARMAR+" width={200} height={200} className="mb-6 opacity-90" src="/my-icon.webp" loading="lazy" sizes="(max-width: 768px) 150px, 200px" style={{ width: '100%', height: 'auto', maxWidth: '200px' }} />

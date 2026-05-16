@@ -6,8 +6,8 @@ export default function Hero() {
         <div id="home" className="relative w-full h-[90vh] min-h-[700px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <picture>
-                        <source media="(min-width: 1024px)" srcSet="/logo-lg.webp" />
-                        <source media="(min-width: 768px)" srcSet="/logo-md.webp" />
+                        <source media="(min-width: 1166px)" srcSet="/logo-lg.webp" />
+                        <source media="(min-width: 851px)" srcSet="/logo-md.webp" />
                         <img 
                             alt="Marble background" 
                             className="w-full h-full object-cover object-center" 
@@ -20,7 +20,7 @@ export default function Hero() {
                 
                 <div className="relative z-10 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex flex-col items-start text-left pt-20 h-full justify-between pb-16">
                     <div className="max-w-3xl mt-auto">
-                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-auto">
+                        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 mt-auto">
                             <a href="#projects" className="inline-flex justify-center items-center bg-secondary text-on-secondary px-6 py-3 md:px-8 md:py-4 font-label-lg text-label-lg uppercase tracking-widest rounded-DEFAULT transition-all duration-300 hover:bg-secondary-fixed hover:shadow-[0_0_20px_rgba(233,195,73,0.4)] hover:-translate-y-1 text-center">
                                 Explore Projects
                             </a>
