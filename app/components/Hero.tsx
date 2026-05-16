@@ -6,8 +6,8 @@ export default function Hero() {
         <div id="home" className="relative w-full h-[90vh] min-h-[700px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <picture>
-                        <source media="(min-width: 1166px)" srcSet="/logo-lg.webp" />
-                        <source media="(min-width: 851px)" srcSet="/logo-md.webp" />
+                        <source media="(min-width: 1288x)" srcSet="/logo-lg.webp" />
+                        <source media="(min-width: 966px)" srcSet="/logo-md.webp" />
                         <img 
                             alt="Marble background" 
                             className="w-full h-full object-cover object-center" 
