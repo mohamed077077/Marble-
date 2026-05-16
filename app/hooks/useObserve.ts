@@ -6,44 +6,29 @@ export default function useObserve() {
   useEffect(() => {
     const home = document.querySelector("#home");
     const projects = document.querySelector("#projects");
-    const materials = document.querySelector("#products");
-    const contact = document.querySelector("#contact");   
-    const sections = [home, projects, materials, contact];
+    const products = document.querySelector("#products");
+    const contact = document.querySelector("#contact");
+    const sections = [home, projects, products, contact].filter(Boolean) as Element[];
 
     const observer = new IntersectionObserver(
-    (entries) => {
-      let visibleSection = "";
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        threshold: [0.5],
+      }
+    );
 
-      entries.forEach((entry) => {
-        // 
-        if (
-          entry.isIntersecting &&
-          entry.intersectionRatio > 0.5
-        ) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    },
-    {
-      threshold: [0.5],
-      /*
-      then the callback runs when:
-        the section reaches 50% visibility
-        OR leaves 50% visibility
-      */ 
-    }
-  );
+    sections.forEach((section) => observer.observe(section));
 
-  sections.forEach((section) => {
-    observer.observe(section as Element);
-  });
-
-  return () => {
-    sections.forEach((section) => {
-      observer.unobserve(section as Element);
-    });
-  };
-}, []);
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
 
   return activeSection;
 }
