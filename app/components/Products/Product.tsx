@@ -4,14 +4,16 @@ import { useState } from "react";
 import ImageModal from "../ImageModal";
 import useSubsent from "../../hooks/useSubsent";
 import { DataType } from "./Products";
+import { Ticket } from "lucide-react";
 
 interface ProductProps {
     product: DataType;
     isFocused?: boolean;
+    isMaterial ?: boolean;
 }
 
-export default function Product({ product, isFocused }: ProductProps) {
-    const { _id, title, imageUrl } = product;
+export default function Product({ product, isFocused, isMaterial }: ProductProps) {
+    const { _id, title, imageUrl, type } = product;
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const { imgRef, isLoaded, setIsLoaded } = useSubsent();
 
@@ -34,6 +36,12 @@ export default function Product({ product, isFocused }: ProductProps) {
                         src={imageUrl} 
                         onLoad={() => setIsLoaded(true)}
                     />
+                    {isMaterial && type && (
+                        <div className="absolute bottom-4 left-4 z-10 flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-secondary-fixed via-secondary-fixed-dim to-secondary-fixed text-on-secondary-fixed font-bold text-xs uppercase tracking-widest shadow-lg border border-secondary/40 select-none">
+                            <Ticket className="w-4 h-4 text-on-secondary-fixed" />
+                            <span>{type.replace('-', ' ')}</span>
+                        </div>
+                    )}
                 </div>
                 
                 <div className="p-6">

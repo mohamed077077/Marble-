@@ -12,7 +12,8 @@ interface DataType {
     _id: Types.ObjectId;
     title: string;
     imageUrl: string;
-    order?: number;
+    order: number;
+    type?: 'granite' | 'marble' | 'natural-stone' | 'other'
 }
 
 
@@ -83,6 +84,7 @@ export default function Display({activeTab}: {activeTab: Tab}) {
                             id={item._id.toString()}
                             title={item.title} 
                             imageUrl={item.imageUrl} 
+                            type={item.type}
                             deleteAction={deleteAction}
                             upvoteAction={upvoteAction}
                             downvoteAction={downvoteAction}

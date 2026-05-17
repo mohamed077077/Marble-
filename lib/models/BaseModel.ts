@@ -1,13 +1,13 @@
 import { Document } from "mongoose";
 
 export interface IBaseItem extends Document {
-    title: string;
+    title?: string;
     imageUrl: string;
     order: number;
 }
 
 export const BaseSchemaFields = {
-    title: { type: String, required: true },
+    title: { type: String, required: false },
     imageUrl: { type: String, required: true },
     order: { type: Number, required: true }
 };

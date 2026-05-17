@@ -5,4 +5,8 @@ export interface Project extends IBaseItem {}
 
 const ProjectSchema: Schema = new Schema(BaseSchemaFields, BaseSchemaOptions);
 
-export const Project: Model<Project> = mongoose.models.Project || mongoose.model<Project>("Project", ProjectSchema);
+if (mongoose.models.Project) {
+    delete mongoose.models.Project;
+}
+
+export const Project: Model<Project> = mongoose.model<Project>("Project", ProjectSchema);

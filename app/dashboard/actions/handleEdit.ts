@@ -4,8 +4,9 @@ interface HandleSubmitArgs {
     id : string;
     activeTab : string;
     submissionData : {
-        title : string;
-        image ?: File
+        title ?: string;
+        image ?: File;
+        type ?: 'granite' | 'marble' | 'natural-stone' | 'other';
     }
     setError: (error: { title?: string;  fetch?: string }) => void;
     handleClose: (e?: React.MouseEvent) => void;
@@ -24,11 +25,6 @@ export const handleEditAction = async ({
 }: HandleSubmitArgs) => {
     setError({});
 
-    if (!submissionData.title.trim()) {
-        setError({ title: "Title is required" });
-        setIsSubmitting(false);
-        return;
-    }
 
 
 
@@ -51,7 +47,19 @@ let imageUrl: string = "";
                 ? `/api/products?id=${id}`
                 : `/api/materials?id=${id}`;
 
-        const data = imageUrl === '' ? {title: submissionData.title.trim()} : {title: submissionData.title.trim(), imageUrl: imageUrl};
+        let data: Record<string, unknown> = {};
+
+        if (submissionData.title !== undefined) {
+            data.title = submissionData.title.trim();
+        }
+
+        if (imageUrl !== "") {
+            data.imageUrl = imageUrl;
+        }
+
+        if (submissionData.type) {
+            data.type = submissionData.type;
+        }
 
         const response = await fetch(endpoint, {
             method: "PUT",

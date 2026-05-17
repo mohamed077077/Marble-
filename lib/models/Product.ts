@@ -5,4 +5,8 @@ export interface Product extends IBaseItem {}
 
 const ProductSchema: Schema<Product> = new Schema(BaseSchemaFields, BaseSchemaOptions);
 
-export const Product: Model<Product> = mongoose.models.Product || mongoose.model<Product>("Product", ProductSchema);
+if (mongoose.models.Product) {
+    delete mongoose.models.Product;
+}
+
+export const Product: Model<Product> = mongoose.model<Product>("Product", ProductSchema);

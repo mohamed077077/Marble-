@@ -3,12 +3,13 @@
 import { useState } from "react";
 import EditModal from "./EditModal";
 import useSubsent from "../../hooks/useSubsent";
-import { Trash2, ChevronUp, ChevronDown } from "lucide-react";
+import { Trash2, ChevronUp, ChevronDown, Ticket } from "lucide-react";
 
 interface CardProps {
     id: string;
     title: string;
     imageUrl: string;
+    type?: 'granite' | 'marble' | 'natural-stone' | 'other';
     className?: string;
 
     deleteAction: (id: string , setDeleting: React.Dispatch<React.SetStateAction<boolean>>) => void;
@@ -18,7 +19,7 @@ interface CardProps {
     refetch: () => void;
 }
 
-export default function Card({ id, title, imageUrl, className = "block", deleteAction , upvoteAction , downvoteAction, activeTab, refetch }: CardProps) {
+export default function Card({ id, title, imageUrl,type, className = "block", deleteAction , upvoteAction , downvoteAction, activeTab, refetch }: CardProps) {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const { imgRef, isLoaded, setIsLoaded } =    useSubsent();
     const [isDeleting, setIsDeleting] = useState(false);
@@ -29,6 +30,7 @@ export default function Card({ id, title, imageUrl, className = "block", deleteA
         e.stopPropagation();
         setShowConfirm(true);
     };
+    console.log(activeTab);
 
     return (
         <>
@@ -58,6 +60,12 @@ export default function Card({ id, title, imageUrl, className = "block", deleteA
                         src={imageUrl}
                         onLoad={() => setIsLoaded(true)}
                     />
+                    {activeTab === "materials" && type && (
+                        <div className="absolute bottom-4 left-4 z-10 flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-secondary-fixed via-secondary-fixed-dim to-secondary-fixed text-on-secondary-fixed font-bold text-xs uppercase tracking-widest shadow-lg border border-secondary/40 select-none">
+                            <Ticket className="w-4 h-4 text-on-secondary-fixed" />
+                            <span>{type.replace('-', ' ')}</span>
+                        </div>
+                    )}
                 </div>
 
                 <div className="p-8 flex justify-between">
@@ -66,6 +74,7 @@ export default function Card({ id, title, imageUrl, className = "block", deleteA
                         <h3 className="font-headline-md text-headline-md text-primary mb-2 transition group-hover:text-secondary">
                             {title}
                         </h3>
+
                         <div className="h-[2px] w-16 bg-secondary"></div>
                     </div>
                     <div className="flex items-end">
@@ -98,6 +107,7 @@ export default function Card({ id, title, imageUrl, className = "block", deleteA
                 onClose={() => setIsDialogOpen(false)} 
                 imageUrl={imageUrl} 
                 title={title} 
+                type={type}
                 id={id} 
                 activeTab={activeTab}
                 refetch={refetch}

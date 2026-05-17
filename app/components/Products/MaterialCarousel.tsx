@@ -97,6 +97,7 @@ export default function MaterialCarousel({ title, isMaterial }: MaterialCarousel
                             <Product 
                                 product={item}
                                 isFocused={index === displayIndex}
+                                isMaterial={isMaterial}
                             />
                         </div>
                     ))}

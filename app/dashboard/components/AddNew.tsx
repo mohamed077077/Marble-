@@ -9,6 +9,7 @@ export default function AddNew({ setActiveTab }: { setActiveTab: (tab: Tab) => v
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [title, setTitle] = useState<string>('');
     const [previewUrl, setPreviewUrl] = useState<string>("");
+    const [type, settype] = useState<'granite' | 'marble' | 'natural-stone' | 'other'>('granite');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errors , setError] = useState<{title?:string , image?:string ,fetch?:string}>({});
 
@@ -28,6 +29,7 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             title,
             imageFile,
             category,
+            type,
             setIsSubmitting,
             setError,
             setActiveTab,
@@ -58,7 +60,24 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                         <option value="materials">Materials</option>
                     </select>
                 </div>
-
+                {category === "materials" && (
+                    <div className="flex flex-col gap-2">
+                        <label htmlFor="type" className="text-label-lg font-label-lg text-on-surface-variant uppercase">
+                            Material Type
+                        </label>
+                        <select
+                            id="type"
+                            value={type}
+                            onChange={(e) => settype(e.target.value as 'granite' | 'marble' | 'natural-stone' | 'other')}
+                            className="p-4 border border-outline-variant rounded-xl outline-none focus:ring-2 focus:ring-primary bg-surface-container-lowest text-body-md transition-all"
+                        >
+                            <option value="granite">Granite</option>
+                            <option value="marble">Marble</option>
+                            <option value="natural-stone">Natural Stone</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                )}
                 {/* Title Input */}
                 <div className="flex flex-col gap-2">
                     <label htmlFor="title" className="text-label-lg font-label-lg text-on-surface-variant uppercase">

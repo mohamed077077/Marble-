@@ -2,9 +2,10 @@ import { uploadImageToCloudinary } from "@/lib/uploadImageToCloudinary";
 import { Tab } from "../page";
 
 interface HandleSubmitArgs {
-    title: string;
+    title?: string;
     imageFile: File | null;
     category: 'projects' | 'products' | 'materials';
+    type?: 'granite' | 'marble' | 'natural-stone' | 'other';
     setIsSubmitting: (value: boolean) => void;
     setError: (error: { title?: string; image?: string; fetch?: string }) => void;
     setActiveTab: (tab: Tab) => void;
@@ -14,6 +15,7 @@ export const handleSubmitAction = async ({
     title,
     imageFile,
     category,
+    type,
     setIsSubmitting,
     setError,
     setActiveTab,
@@ -21,11 +23,7 @@ export const handleSubmitAction = async ({
     setIsSubmitting(true);
     setError({});
 
-    if (!title.trim()) {
-        setError({ title: "Title is required" });
-        setIsSubmitting(false);
-        return;
-    }
+
 
     if (!imageFile) {
         setError({ image: "Image is required" });
@@ -56,21 +54,23 @@ export const handleSubmitAction = async ({
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                title: title.trim(),
+                title: title?.trim(),
                 imageUrl: imageUrl,
+                type: type,
             }),
         });
 
         if (!response.ok) {
-            throw new Error("Failed to create record");
+            const errData = await response.json().catch(() => ({}));
+            throw new Error(errData.error || "Failed to create record");
         }
 
         setIsSubmitting(false);
         setError({});
         setActiveTab(category);
-    } catch (error) {
+    } catch (error: any) {
         console.error("Error creating record:", error);
-        setError({ fetch: "Error creating project" });
+        setError({ fetch: error.message || "Error creating record" });
         setIsSubmitting(false);
     }
 };

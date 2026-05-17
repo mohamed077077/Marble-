@@ -10,12 +10,13 @@ interface ImageModalProps {
     onClose: () => void;
     imageUrl: string;
     title: string;
+    type?: 'granite' | 'marble' | 'natural-stone' | 'other';
     id: string;
     activeTab: string;
     refetch: () => void;
 }
 
-export default function EditModal({ isOpen, onClose, imageUrl, title, id, activeTab, refetch }: ImageModalProps) {
+export default function EditModal({ isOpen, onClose, imageUrl, title,type, id, activeTab, refetch }: ImageModalProps) {
     const [mounted, setMounted] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,6 +25,10 @@ export default function EditModal({ isOpen, onClose, imageUrl, title, id, active
         title: title,
         imageUrl: imageUrl
     });
+    const [materialType, setMaterialType] = useState<'granite' | 'marble' | 'natural-stone' | 'other'>(
+    type || 'granite'
+);
+
 
     useEffect(() => {
         setMounted(true);
@@ -54,7 +59,8 @@ export default function EditModal({ isOpen, onClose, imageUrl, title, id, active
         setIsSubmitting(true);
         const submissionData = {
             title: formData.title,
-            image: fileInputRef.current?.files?.[0]
+            image: fileInputRef.current?.files?.[0],
+            type: materialType,
         };
         await handleEditAction({
             id,
@@ -143,6 +149,23 @@ export default function EditModal({ isOpen, onClose, imageUrl, title, id, active
                             />
                             {error?.title && <p className="text-sm text-error ml-1">{error.title}</p>}
                         </div>
+
+                        {/* Material Type Dropdown */}
+                        {activeTab === 'materials' && (
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-primary ml-1 uppercase tracking-wider">Material Type</label>
+                                <select
+                                    value={materialType}
+                                    onChange={(e) => setMaterialType(e.target.value as 'granite' | 'marble' | 'natural-stone' | 'other')}
+                                    className="w-full bg-surface p-4 rounded-2xl border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-on-surface font-body-lg cursor-pointer"
+                                >
+                                    <option value="granite">Granite</option>
+                                    <option value="marble">Marble</option>
+                                    <option value="natural-stone">Natural Stone</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        )}
 
                         {error?.fetch && (
                             <div className="p-4 bg-error/10 border border-error/20 rounded-xl text-error text-sm">

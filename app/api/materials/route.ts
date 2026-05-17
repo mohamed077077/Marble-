@@ -47,9 +47,16 @@ export async function PATCH(request: Request) {
         const id = searchParams.get('id');
         const vote = searchParams.get('vote');
 
-        if (!id) {
+        if (!vote) {
             return NextResponse.json(
-                { error: 'Project ID is required' },
+                { error: 'voting is required' },
+                { status: 400 }
+            );
+        }
+
+                if (!id) {
+            return NextResponse.json(
+                { error: 'Material ID is required' },
                 { status: 400 }
             );
         }

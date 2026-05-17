@@ -5,8 +5,9 @@ import { Types } from 'mongoose';
 
 export interface DataType {
     _id: Types.ObjectId;
-    title: string;
+    title?: string;
     imageUrl: string;
+    type?: 'granite' | 'marble' | 'natural-stone' | 'other';
 }
 
 export default function Products() {
