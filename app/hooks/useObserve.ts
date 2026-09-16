@@ -4,29 +4,47 @@ export default function useObserve() {
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    const home = document.querySelector("#home");
-    const projects = document.querySelector("#projects");
-    const products = document.querySelector("#products");
-    const contact = document.querySelector("#contact");
-    const sections = [home, projects, products, contact].filter(Boolean) as Element[];
+    const sectionIds = [
+      "home",
+      "projects",
+      "products",
+      "contact",
+    ];
+
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => section !== null);
+
+    if (!sections.length) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-            setActiveSection(entry.target.id);
-          }
-        });
+        const visibleSections = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (a, b) =>
+              b.intersectionRatio - a.intersectionRatio
+          );
+
+        if (visibleSections.length > 0) {
+          setActiveSection(
+            visibleSections[0].target.id
+          );
+        }
       },
       {
-        threshold: [0.5],
+        root: null,
+        rootMargin: "-20% 0px -60% 0px",
+        threshold: [0, 0.25, 0.5, 0.75, 1],
       }
     );
 
-    sections.forEach((section) => observer.observe(section));
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
 
     return () => {
-      sections.forEach((section) => observer.unobserve(section));
+      observer.disconnect();
     };
   }, []);
 

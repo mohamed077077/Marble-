@@ -53,7 +53,7 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                         id="category"
                         value={category}
                         onChange={(e) => setCategory(e.target.value as 'projects' | 'products' | 'materials')}
-                        className="p-4 border border-outline-variant rounded-xl outline-none focus:ring-2 focus:ring-primary bg-surface-container-lowest text-body-md transition-all"
+                        className="w-full appearance-none rounded-xl border border-outline/20 bg-surface-container bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%2378716c%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%2F%3E%3C%2Fsvg%3E')] bg-size-[1.25rem] bg-position-[right_0.875rem_center] bg-no-repeat pl-4 pr-10 py-3 shadow-sm transition-all duration-200 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 focus:shadow-lg"
                     >
                         <option value="projects">Projects</option>
                         <option value="products">Products</option>
@@ -69,7 +69,7 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                             id="type"
                             value={type}
                             onChange={(e) => settype(e.target.value as 'granite' | 'marble' | 'natural-stone' | 'other')}
-                            className="p-4 border border-outline-variant rounded-xl outline-none focus:ring-2 focus:ring-primary bg-surface-container-lowest text-body-md transition-all"
+                            className="w-full appearance-none rounded-xl border border-outline/20 bg-surface-container bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%2378716c%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%2F%3E%3C%2Fsvg%3E')] bg-size-[1.25rem] bg-position-[right_0.875rem_center] bg-no-repeat pl-4 pr-10 py-3 shadow-sm transition-all duration-200 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 focus:shadow-lg"
                         >
                             <option value="granite">Granite</option>
                             <option value="marble">Marble</option>
@@ -90,7 +90,7 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder="Enter item title..."
-                        className={`p-4 border rounded-xl outline-none focus:ring-2 transition-all placeholder:text-outline bg-surface-container-lowest text-body-md ${errors.title ? 'border-error focus:ring-error/20' : 'border-outline-variant focus:ring-primary'}`}
+                        className={`w-full rounded-xl border px-4 py-3 shadow-sm transition-all duration-200 outline-none focus:ring-2 focus:shadow-lg placeholder:text-outline bg-surface-container ${errors.title ? 'border-error focus:border-error focus:ring-error/20' : 'border-outline/20 focus:border-primary focus:ring-primary/20'}`}
                     />
                     {errors.title && <p className="text-error text-label-lg font-label-lg uppercase mt-1 px-1">{errors.title}</p>}
                 </div>

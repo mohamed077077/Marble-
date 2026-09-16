@@ -10,11 +10,8 @@ export default function useSubsent() {
         }
     }, []);
 
-    /* Sometimes the image is already cached (ALREADY LOADED).
-    onLoad does NOT fire again, so, isLoaded will be still false
-    */
-
-
 
     return { imgRef, isLoaded, setIsLoaded };
 }
+
+
