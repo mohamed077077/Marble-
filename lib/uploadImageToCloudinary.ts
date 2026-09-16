@@ -1,4 +1,6 @@
 import imageCompression from 'browser-image-compression';
+import { getCloudinaryCloudName } from '@/app/dashboard/actions/getCloudName';
+
 
 export const uploadImageToCloudinary = async (file: File): Promise<string> => {
     const options = {
@@ -21,7 +23,7 @@ export const uploadImageToCloudinary = async (file: File): Promise<string> => {
     formData.append("file", file);
     formData.append("upload_preset", "marble");
 
-    const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+    const cloudName = await getCloudinaryCloudName();
 
     if (!cloudName) {
         throw new Error("Cloudinary cloud name is missing from environment variables.");
