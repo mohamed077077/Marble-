@@ -2,8 +2,8 @@ import imageCompression from 'browser-image-compression';
 
 export const uploadImageToCloudinary = async (file: File): Promise<string> => {
     const options = {
-        maxSizeMB: 0.5,         
-        maxWidthOrHeight: 1920,  
+        maxSizeMB: 0.5,
+        maxWidthOrHeight: 1920,
         useWebWorker: true,
         fileType: 'image/webp',
         initialQuality: 75,
@@ -11,17 +11,17 @@ export const uploadImageToCloudinary = async (file: File): Promise<string> => {
 
     try {
         const compressedFile = await imageCompression(file, options);
-        
-        file = compressedFile; 
+
+        file = compressedFile;
     } catch (error) {
         console.error('Compression error:', error);
     }
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "marble"); 
+    formData.append("upload_preset", "marble");
 
-    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+    const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
 
     if (!cloudName) {
         throw new Error("Cloudinary cloud name is missing from environment variables.");
@@ -41,8 +41,8 @@ export const uploadImageToCloudinary = async (file: File): Promise<string> => {
         }
 
         const optimizedUrl = data.secure_url.replace(
-            '/upload/', 
-            '/upload/f_webp,q_auto/' 
+            '/upload/',
+            '/upload/f_webp,q_auto/'
         );
 
         // Return the optimized, secure URL
@@ -50,6 +50,6 @@ export const uploadImageToCloudinary = async (file: File): Promise<string> => {
 
     } catch (error) {
         console.error("Cloudinary Upload Error:", error);
-        throw error; 
+        throw error;
     }
 };
